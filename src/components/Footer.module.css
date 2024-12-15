@@ -1,0 +1,21 @@
+/* Footer.module.css */
+.footer {
+    background-color: #333; /* Cor de fundo escura */
+    color: #fff; /* Texto em branco */
+    text-align: center; /* Centralizar o texto */
+    padding: 15px 20px; /* Espaçamento interno */
+    font-size: 14px; /* Tamanho da fonte */
+    border-top: 2px solid #4CAF50; /* Linha decorativa no topo */
+}
+  
+.footer p {
+    margin: 0; /* Remove margens padrão */
+    line-height: 1.5; /* Ajusta o espaçamento entre linhas */
+}
+  
+@media (max-width: 768px) {
+    .footer {
+      font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
+      padding: 10px 15px;
+    }
+}

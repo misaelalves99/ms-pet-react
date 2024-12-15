@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
-// import { Logo } from '../assets/Logo.png';
+import styles from './Navbar.module.css';
 
 function Navbar() {
   return (
-    <div>
-      <img src="../assets/Logo.png" alt="Logo" />
-      <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/login">Entrar</Link></li>
-          <li><Link to="/register">Registrar</Link></li>
-        </ul>
-      </div>
+    <div className={styles.navbar}>
+      {/* Logo */}
+      <img src="../assets/Logo.png" alt="Logo" className={styles.logo} />
+
+      {/* Navigation Links */}
+      <ul className={styles.navLinks}>
+        <li><Link to="/" className={styles.navLinkItem}>Home</Link></li>
+        <li><Link to="/login" className={styles.navLinkItem}>Entrar</Link></li>
+        <li><Link to="/register" className={styles.navLinkItem}>Registrar</Link></li>
+      </ul>
     </div>
   );
 }
 
 export default Navbar;
-
