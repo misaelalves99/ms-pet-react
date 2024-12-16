@@ -1,21 +1,19 @@
-/* Footer.module.css */
 .footer {
-    background-color: #333; /* Cor de fundo escura */
-    color: #fff; /* Texto em branco */
+    background-color: #f2f2f2; /* Cor de fundo cinza claro */
+    color: #333; /* Texto em cinza escuro */
     text-align: center; /* Centralizar o texto */
-    padding: 15px 20px; /* Espaçamento interno */
-    font-size: 14px; /* Tamanho da fonte */
-    border-top: 2px solid #4CAF50; /* Linha decorativa no topo */
+    padding: 20px 25px; /* Espaçamento interno aumentado */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
 }
-  
+
 .footer p {
     margin: 0; /* Remove margens padrão */
-    line-height: 1.5; /* Ajusta o espaçamento entre linhas */
+    line-height: 1.6; /* Ajusta o espaçamento entre linhas */
 }
-  
+
 @media (max-width: 768px) {
     .footer {
-      font-size: 12px; /* Reduz o tamanho da fonte em telas menores */
-      padding: 10px 15px;
+      font-size: 14px; /* Ajuste de fonte para telas menores */
+      padding: 15px 20px; /* Ajuste de espaçamento */
     }
 }
