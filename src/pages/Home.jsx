@@ -1,8 +1,15 @@
-import PetList from '../components/PetList';
-import styles from './Home.module.css';
+import { useState } from "react";
+import PetList from "../components/PetList";
+import styles from "./Home.module.css";
 import { FaSearch } from "react-icons/fa";
 
 function Home() {
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -36,19 +43,40 @@ function Home() {
         <h2 className={styles.title}>Categorias</h2>
         <div className={styles.options}>
           <label>
-            <input type="radio" name="category" defaultChecked /> Todos
+            <input
+              type="radio"
+              name="category"
+              value="Todos"
+              checked={selectedCategory === "Todos"}
+              onChange={handleCategoryChange}
+            />{" "}
+            Todos
           </label>
           <label>
-            <input type="radio" name="category" /> Cachorro
+            <input
+              type="radio"
+              name="category"
+              value="Cachorro"
+              checked={selectedCategory === "Cachorro"}
+              onChange={handleCategoryChange}
+            />{" "}
+            Cachorro
           </label>
           <label>
-            <input type="radio" name="category" /> Gato
+            <input
+              type="radio"
+              name="category"
+              value="Gato"
+              checked={selectedCategory === "Gato"}
+              onChange={handleCategoryChange}
+            />{" "}
+            Gato
           </label>
         </div>
       </div>
 
       {/* Pet List Section */}
-      <PetList />
+      <PetList selectedCategory={selectedCategory} />
     </>
   );
 }
