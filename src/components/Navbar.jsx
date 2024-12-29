@@ -53,6 +53,43 @@ function Navbar() {
           )}
         </ul>
       </div>
+      <ul className={styles.navLinks}>
+        {/* Home sempre visível */}
+        <li>
+          <Link to="/" className={styles.navLinkItem}>
+            Home
+          </Link>
+        </li>
+
+        {/* Links condicionais */}
+        {isAuthenticated ? (
+          <>
+            <li>
+              <Link to="/meus-pets" className={styles.navLinkItem}>
+                Meus Pets
+              </Link>
+            </li>
+            <li>
+              <button onClick={logout} className={styles.navLinkItem}>
+                Sair
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/login" className={styles.navLinkItem}>
+                Entrar
+              </Link>
+            </li>
+            <li>
+              <Link to="/register" className={styles.navLinkItem}>
+                Registrar
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
     </div>
   );
 }
