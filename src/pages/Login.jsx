@@ -1,13 +1,21 @@
-import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import styles from "../pages/Login.module.css";
 
 const Login = () => {
+  const { login } = useAuth();
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    // Aqui você pode adicionar lógica de autenticação, como verificar o email e a senha.
+    login(); // Atualiza o estado de autenticação.
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <h1 className={styles.title}>Login</h1>
         <p className={styles.subtitle}>faça seu login</p>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleLogin}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
             <input
@@ -26,22 +34,10 @@ const Login = () => {
               className={styles.input}
             />
           </div>
-          <div className={styles.options}>
-            <label className={styles.checkbox}>
-              <input type="checkbox" />
-              Manter-me conectado
-            </label>
-            <a href="#" className={styles.link}>
-              Esqueceu a Senha?
-            </a>
-          </div>
           <button type="submit" className={styles.button}>
             Login
           </button>
         </form>
-        <p className={styles.footer}>
-          Não tem uma conta? <Link to="register" className={styles.link}>Cadastre-se</Link>
-        </p>
       </div>
     </div>
   );
