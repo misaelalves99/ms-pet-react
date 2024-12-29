@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./PetList.module.css";
 import dog1 from "../assets/pets/dog/dog-01.jpg";
 import dog2 from "../assets/pets/dog/dog-02.jpg";
@@ -41,60 +42,71 @@ import cat18 from "../assets/pets/cat/cat-18.jpg";
 import cat19 from "../assets/pets/cat/cat-19.jpg";
 import cat20 from "../assets/pets/cat/cat-20.jpg";
 
-function PetList() {
+function PetList( { selectedCategory } ) {
     const pets = [
-      { id: 1, name: "Luck", weight: "5kg", image: dog1},
-      { id: 2, name: "Luck", weight: "5kg", image: dog2},
-      { id: 3, name: "Luck", weight: "5kg", image: cat1},
-      { id: 4, name: "Luck", weight: "5kg", image: cat2},
-      { id: 5, name: "Luck", weight: "5kg", image: cat3},
-      { id: 6, name: "Luck", weight: "5kg", image: dog3},
-      { id: 7, name: "Luck", weight: "5kg", image: dog4},
-      { id: 8, name: "Luck", weight: "5kg", image: cat4},
-      { id: 9, name: "Luck", weight: "5kg", image: dog5},
-      { id: 10, name: "Luck", weight: "5kg", image: dog6},
-      { id: 11, name: "Luck", weight: "5kg", image: cat5},
-      { id: 12, name: "Luck", weight: "5kg", image: cat6},
-      { id: 13, name: "Luck", weight: "5kg", image: dog7},
-      { id: 14, name: "Luck", weight: "5kg", image: dog8},
-      { id: 15, name: "Luck", weight: "5kg", image: dog9},
-      { id: 16, name: "Luck", weight: "5kg", image: cat7},
-      { id: 17, name: "Luck", weight: "5kg", image: cat8},
-      { id: 18, name: "Luck", weight: "5kg", image: cat9},
-      { id: 19, name: "Luck", weight: "5kg", image: dog10},
-      { id: 20, name: "Luck", weight: "5kg", image: dog11},
-      { id: 21, name: "Luck", weight: "5kg", image: cat10},
-      { id: 22, name: "Luck", weight: "5kg", image: cat11},
-      { id: 23, name: "Luck", weight: "5kg", image: cat12},
-      { id: 24, name: "Luck", weight: "5kg", image: dog12},
-      { id: 25, name: "Luck", weight: "5kg", image: dog13},
-      { id: 26, name: "Luck", weight: "5kg", image: dog14},
-      { id: 27, name: "Luck", weight: "5kg", image: cat13},
-      { id: 28, name: "Luck", weight: "5kg", image: cat14},
-      { id: 29, name: "Luck", weight: "5kg", image: dog15},
-      { id: 30, name: "Luck", weight: "5kg", image: dog16},
-      { id: 31, name: "Luck", weight: "5kg", image: dog17},
-      { id: 32, name: "Luck", weight: "5kg", image: cat15},
-      { id: 33, name: "Luck", weight: "5kg", image: cat16},
-      { id: 34, name: "Luck", weight: "5kg", image: cat17},
-      { id: 35, name: "Luck", weight: "5kg", image: dog18},
-      { id: 36, name: "Luck", weight: "5kg", image: dog19},
-      { id: 37, name: "Luck", weight: "5kg", image: dog20},
-      { id: 38, name: "Luck", weight: "5kg", image: cat18},
-      { id: 39, name: "Luck", weight: "5kg", image: cat19},
-      { id: 40, name: "Luck", weight: "5kg", image: cat20},
+      { id: 1, name: "Luck", weight: "5kg", image: dog1, category: "Cachorro"},
+      { id: 2, name: "Luck", weight: "5kg", image: dog2, category: "Cachorro"},
+      { id: 3, name: "Luck", weight: "5kg", image: cat1, category: "Gato"},
+      { id: 4, name: "Luck", weight: "5kg", image: cat2, category: "Gato"},
+      { id: 5, name: "Luck", weight: "5kg", image: cat3, category: "Gato"},
+      { id: 6, name: "Luck", weight: "5kg", image: dog3, category: "Cachorro"},
+      { id: 7, name: "Luck", weight: "5kg", image: dog4, category: "Cachorro"},
+      { id: 8, name: "Luck", weight: "5kg", image: cat4, category: "Gato"},
+      { id: 9, name: "Luck", weight: "5kg", image: dog5, category: "Cachorro"},
+      { id: 10, name: "Luck", weight: "5kg", image: dog6, category: "Cachorro"},
+      { id: 11, name: "Luck", weight: "5kg", image: cat5, category: "Gato"},
+      { id: 12, name: "Luck", weight: "5kg", image: cat6, category: "Gato"},
+      { id: 13, name: "Luck", weight: "5kg", image: dog7, category: "Cachorro"},
+      { id: 14, name: "Luck", weight: "5kg", image: dog8, category: "Cachorro"},
+      { id: 15, name: "Luck", weight: "5kg", image: dog9, category: "Cachorro"},
+      { id: 16, name: "Luck", weight: "5kg", image: cat7, category: "Gato"},
+      { id: 17, name: "Luck", weight: "5kg", image: cat8, category: "Gato"},
+      { id: 18, name: "Luck", weight: "5kg", image: cat9, category: "Gato"},
+      { id: 19, name: "Luck", weight: "5kg", image: dog10, category: "Cachorro"},
+      { id: 20, name: "Luck", weight: "5kg", image: dog11, category: "Cachorro"},
+      { id: 21, name: "Luck", weight: "5kg", image: cat10, category: "Gato"},
+      { id: 22, name: "Luck", weight: "5kg", image: cat11, category: "Gato"},
+      { id: 23, name: "Luck", weight: "5kg", image: cat12, category: "Gato"},
+      { id: 24, name: "Luck", weight: "5kg", image: dog12, category: "Cachorro"},
+      { id: 25, name: "Luck", weight: "5kg", image: dog13, category: "Cachorro"},
+      { id: 26, name: "Luck", weight: "5kg", image: dog14, category: "Cachorro"},
+      { id: 27, name: "Luck", weight: "5kg", image: cat13, category: "Gato"},
+      { id: 28, name: "Luck", weight: "5kg", image: cat14, category: "Gato"},
+      { id: 29, name: "Luck", weight: "5kg", image: dog15, category: "Cachorro"},
+      { id: 30, name: "Luck", weight: "5kg", image: dog16, category: "Cachorro"},
+      { id: 31, name: "Luck", weight: "5kg", image: dog17, category: "Cachorro"},
+      { id: 32, name: "Luck", weight: "5kg", image: cat15, category: "Gato"},
+      { id: 33, name: "Luck", weight: "5kg", image: cat16, category: "Gato"},
+      { id: 34, name: "Luck", weight: "5kg", image: cat17, category: "Gato"},
+      { id: 35, name: "Luck", weight: "5kg", image: dog18, category: "Cachorro"},
+      { id: 36, name: "Luck", weight: "5kg", image: dog19, category: "Cachorro"},
+      { id: 37, name: "Luck", weight: "5kg", image: dog20, category: "Cachorro"},
+      { id: 38, name: "Luck", weight: "5kg", image: cat18, category: "Gato"},
+      { id: 39, name: "Luck", weight: "5kg", image: cat19, category: "Gato"},
+      { id: 40, name: "Luck", weight: "5kg", image: cat20, category: "Gato"},
     ];
+
+    // Filtrar pets com base na categoria
+    const filteredPets =
+    selectedCategory === "Todos"
+      ? pets
+      : pets.filter((pet) => pet.category === selectedCategory);
+
   
     return (
       <div className={styles.petList}>
-        {pets.map((pet) => (
+        {filteredPets.map((pet) => (
           <div key={pet.id} className={styles.card}>
             <img src={pet.image} alt={pet.name} className={styles.image} />
             <h3 className={styles.name}>{pet.name}</h3>
             <p className={styles.weight}>
               <strong>Peso:</strong> {pet.weight}
             </p>
-            <button className={styles.button}>Mais detalhes</button>
+            <button className={styles.button}>
+              <Link to={`/pet/${pet.id}`} className={styles.button}>
+                Mais detalhes
+              </Link>
+            </button>
           </div>
         ))}
       </div>
