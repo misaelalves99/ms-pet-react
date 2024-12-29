@@ -86,13 +86,6 @@ function PetList( { selectedCategory, searchTerm } ) {
       { id: 40, name: "Jack", weight: "5kg", image: cat20, category: "Gato"},
     ];
 
-    // // Filtrar pets com base na categoria
-    // const filteredPets =
-    // selectedCategory === "Todos"
-    //   ? pets
-    //   : pets.filter((pet) => pet.category === selectedCategory);
-
-    // Filtrar pets com base na categoria e no termo de pesquisa
     const filteredPets = pets.filter(
       (pet) =>
         (selectedCategory === "Todos" || pet.category === selectedCategory) &&
