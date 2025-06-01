@@ -1,38 +1,71 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import styles from "./EditPet.module.css";
+// src/components/EditPet.tsx
 
-function EditPet() {
-  const { id } = useParams();
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { Pet } from '../types/pet';
+import styles from './EditPet.module.css';
+
+const EditPet = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get('id');
+
   const { myPets, updatePet } = useAuth();
 
-  const [petDetails, setPetDetails] = useState({
-    name: "",
-    category: "",
-    weight: "",
-    image: "",
+  const [petDetails, setPetDetails] = useState<Pet>({
+    id: 0,
+    name: '',
+    category: 'Cachorro',
+    weight: '',
+    image: '',
+    description: '',
   });
 
   useEffect(() => {
-    const pet = myPets.find((pet) => pet.id === id);
+    if (!id) return;
+    const petId = Number(id);
+    const pet = myPets.find((p) => p.id === petId);
     if (pet) {
       setPetDetails(pet);
     } else {
-      navigate("/meus-pets"); // Redirect if pet not found
+      navigate('/pet/my-pets');
     }
   }, [id, myPets, navigate]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setPetDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+    setPetDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updatePet(id, petDetails); // Call the update function from context
-    navigate("/meus-pets");
+
+    if (!id) return;
+    const petId = Number(id);
+    if (isNaN(petId)) {
+      console.error('ID inválido');
+      return;
+    }
+
+    const updatedPet: Pet = {
+      id: petId,
+      name: petDetails.name,
+      category: petDetails.category,
+      weight: petDetails.weight,
+      image: petDetails.image,
+      description: petDetails.description,
+    };
+
+    updatePet(petId, updatedPet);
+    navigate('/pet/my-pets');
+  };
+
+  const handleCancel = () => {
+    navigate('/pet/my-pets');
   };
 
   return (
@@ -47,8 +80,10 @@ function EditPet() {
             value={petDetails.name}
             onChange={handleInputChange}
             className={styles.formInput}
+            required
           />
         </label>
+
         <label className={styles.formLabel}>
           Categoria:
           <select
@@ -56,11 +91,13 @@ function EditPet() {
             value={petDetails.category}
             onChange={handleInputChange}
             className={styles.formInput}
+            required
           >
             <option value="Cachorro">Cachorro</option>
             <option value="Gato">Gato</option>
           </select>
         </label>
+
         <label className={styles.formLabel}>
           Peso:
           <input
@@ -69,8 +106,10 @@ function EditPet() {
             value={petDetails.weight}
             onChange={handleInputChange}
             className={styles.formInput}
+            required
           />
         </label>
+
         <label className={styles.formLabel}>
           URL da Imagem:
           <input
@@ -79,15 +118,28 @@ function EditPet() {
             value={petDetails.image}
             onChange={handleInputChange}
             className={styles.formInput}
+            required
           />
         </label>
+
+        <label className={styles.formLabel}>
+          Descrição:
+          <textarea
+            name="description"
+            value={petDetails.description}
+            onChange={handleInputChange}
+            className={styles.formInput}
+            required
+          />
+        </label>
+
         <div className={styles.buttonGroup}>
           <button type="submit" className={styles.saveButton}>
             Salvar
           </button>
           <button
             type="button"
-            onClick={() => navigate("/meus-pets")}
+            onClick={handleCancel}
             className={styles.cancelButton}
           >
             Cancelar
@@ -96,6 +148,6 @@ function EditPet() {
       </form>
     </div>
   );
-}
+};
 
 export default EditPet;

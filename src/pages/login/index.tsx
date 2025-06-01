@@ -1,20 +1,22 @@
-import { useAuth } from "../context/AuthContext";
-import styles from "../pages/Login.module.css";
+// src/pages/login/index.tsx
+
+import { useAuth } from '../../hooks/useAuth';
+import styles from './Login.module.css';
+import { FormEvent } from 'react';
 
 const Login = () => {
   const { login } = useAuth();
 
-  const handleLogin = (event) => {
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Aqui você pode adicionar lógica de autenticação, como verificar o email e a senha.
-    login(); // Atualiza o estado de autenticação.
+    login();
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <h1 className={styles.title}>Login</h1>
-        <p className={styles.subtitle}>faça seu login</p>
+        <p className={styles.subtitle}>Faça seu login</p>
         <form className={styles.form} onSubmit={handleLogin}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
@@ -23,6 +25,7 @@ const Login = () => {
               id="email"
               placeholder="seunome@email.com"
               className={styles.input}
+              required
             />
           </div>
           <div className={styles.inputGroup}>
@@ -30,8 +33,9 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              placeholder="digite sua senha"
+              placeholder="Digite sua senha"
               className={styles.input}
+              required
             />
           </div>
           <button type="submit" className={styles.button}>

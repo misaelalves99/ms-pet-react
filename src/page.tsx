@@ -1,17 +1,20 @@
+// app/page.tsx
+"use client";
+
 import { useState } from "react";
-import PetList from "../components/PetList";
-import styles from "./Home.module.css";
+import PetList from "../app/components/PetList";
+import styles from "../app/Page.module.css";
 import { FaSearch } from "react-icons/fa";
 
-function Home() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
-  const [searchTerm, setSearchTerm] = useState("");
+const Home = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleCategoryChange = (event) => {
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
   };
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
@@ -51,43 +54,24 @@ function Home() {
       <div className={styles.categoriesContainer}>
         <h2 className={styles.title}>Categorias</h2>
         <div className={styles.options}>
-          <label>
-            <input
-              type="radio"
-              name="category"
-              value="Todos"
-              checked={selectedCategory === "Todos"}
-              onChange={handleCategoryChange}
-            />{" "}
-            Todos
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="category"
-              value="Cachorro"
-              checked={selectedCategory === "Cachorro"}
-              onChange={handleCategoryChange}
-            />{" "}
-            Cachorro
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="category"
-              value="Gato"
-              checked={selectedCategory === "Gato"}
-              onChange={handleCategoryChange}
-            />{" "}
-            Gato
-          </label>
+          {["Todos", "Cachorro", "Gato"].map((category) => (
+            <label key={category}>
+              <input
+                type="radio"
+                name="category"
+                value={category}
+                checked={selectedCategory === category}
+                onChange={handleCategoryChange}
+              />{" "}
+              {category}
+            </label>
+          ))}
         </div>
       </div>
 
-      {/* Pet List Section */}
       <PetList selectedCategory={selectedCategory} searchTerm={searchTerm} />
     </>
   );
-}
+};
 
 export default Home;
