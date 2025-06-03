@@ -1,27 +1,13 @@
 // src/pages/register/index.tsx
 
 import React, { useState } from "react";
+import { RegisterFormData } from "../../types/register";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./Register.module.css";
 
-interface FormData {
-  nome: string;
-  sobrenome: string;
-  dataNascimento: string;
-  cpf: string;
-  genero: string;
-  email: string;
-  telefone: string;
-  cep: string;
-  estado: string;
-  cidade: string;
-  bairro: string;
-  endereco: string;
-}
-
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegisterFormData>({
     nome: "",
     sobrenome: "",
     dataNascimento: "",
